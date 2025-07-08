@@ -1,67 +1,85 @@
 // main.jsx
 
-import React, { useState } from "react";
-import ReactDOM from "react-dom/client";
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom/client';
+
+const DEFAULT_API_KEY = import.meta.env.VITE_DEFAULT_API_KEY || "";
 
 function App() {
-  const [prompt, setPrompt] = useState("");
-  const [response, setResponse] = useState("");
+  const [prompt, setPrompt] = useState('');
+  const [response, setResponse] = useState('');
+  const [apiKey, setApiKey] = useState(DEFAULT_API_KEY);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
-    if (!prompt) {
-      setResponse("Please enter a prompt.");
-      return;
-    }
-
+    if (!prompt.trim()) return;
     setLoading(true);
+    setResponse('');
+
     try {
-      const res = await fetch("https://just-ken-backend-668853189629.us-central1.run.app/retrieve", {
-        method: "POST",
+      const res = await fetch('https://just-ken-backend-668853189629.us-central1.run.app/retrieve', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json"
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`
         },
-        body: JSON.stringify({ prompt }),
+        body: JSON.stringify({ prompt })
       });
 
       const data = await res.json();
-      if (data.response) {
-        setResponse(data.response);
-      } else if (data.error) {
-        setResponse("Error: " + data.error);
-      } else {
-        setResponse("Unexpected response.");
-      }
+      setResponse(data.response || 'No response received.');
     } catch (err) {
-      setResponse("Request failed: " + err.message);
-    } finally {
-      setLoading(false);
+      setResponse('Error: ' + err.message);
     }
+
+    setLoading(false);
   };
 
   return (
-    <div style={{ padding: "2rem", fontFamily: "sans-serif", backgroundColor: "#121212", color: "#f1f1f1", minHeight: "100vh" }}>
-      <h1>Damn. Good. Writer.</h1>
-      <p>Digital Cyrano<br /><em>*No Em Dashes!*</em></p>
+    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center space-y-6 p-6 font-sans">
+      <h1 className="text-5xl font-bold text-white">Damn. Good.</h1>
+      <p className="text-lg text-gray-300">Digital Cyrano, whispering your future in AI.</p>
 
-      <textarea
-        rows="4"
+      <input
+        type="text"
+        className="w-full max-w-xl p-4 rounded text-black"
+        placeholder="Write your prompt here…"
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
-        placeholder="Enter your prompt"
-        style={{ width: "100%", padding: "1rem", fontSize: "1.1rem", marginBottom: "1rem" }}
       />
 
-      <button onClick={handleSubmit} style={{ padding: "0.75rem 1.5rem", fontSize: "1rem", backgroundColor: "#d62828", color: "white", border: "none", cursor: "pointer" }}>
+      <input
+        type="text"
+        className="w-full max-w-xl p-2 rounded text-black"
+        placeholder="Enter your OpenAI API key"
+        value={apiKey}
+        onChange={(e) => setApiKey(e.target.value)}
+      />
+
+      <button
+        onClick={handleSubmit}
+        className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded"
+      >
         Write Like Me
       </button>
 
-      <div style={{ marginTop: "2rem", whiteSpace: "pre-wrap", backgroundColor: "#1e1e1e", padding: "1rem", borderRadius: "8px" }}>
-        {loading ? "Writing..." : response}
+      <p className="text-gray-400">{loading ? 'Composing your future…' : ''}</p>
+
+      {response && (
+        <div className="bg-gray-900 p-4 mt-4 rounded max-w-xl w-full">
+          <h2 className="font-bold mb-2">Just Ken’s output</h2>
+          <p className="whitespace-pre-line text-gray-100">{response}</p>
+        </div>
+      )}
+
+      <div className="text-center mt-6 text-sm text-gray-500">
+        <p><span className="text-blue-400">Funny quips in your pocket.</span></p>
+        <p><span className="text-blue-400">Serious pitches with confidence</span> &nbsp; A library of human warmth.</p>
+        <p className="mt-2 italic">Original human results™</p>
+        <p className="text-xs mt-1">© Copyright 2024 · Built with the ChatGPT</p>
       </div>
     </div>
   );
 }
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
