@@ -45,20 +45,19 @@ function App() {
         onChange={(e) => setPrompt(e.target.value)}
       />
 
-      <div className="flex space-x-4">
-        <button
-          onClick={handleSubmit}
-          className="bg-red-500 hover:bg-red-600 text-black font-bold py-2 px-6 rounded"
-        >
-          Write Like Me
-        </button>
-        <button
-          onClick={() => setPrompt('')}
-          className="bg-green-500 hover:bg-green-600 text-black font-bold py-2 px-6 rounded"
-        >
-          New Prompt
-        </button>
-      </div>
+      <button
+        onClick={handleSubmit}
+        className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded"
+      >
+        Write Like Me
+      </button>
+
+      <button
+        onClick={() => { setPrompt(''); setResponse(''); }}
+        className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded mt-2"
+      >
+        Next Prompt
+      </button>
 
       <p className="text-gray-400">{loading ? 'Composing your future…' : ''}</p>
 
@@ -71,7 +70,7 @@ function App() {
 
       <div className="text-center mt-6 text-sm text-gray-500">
         <p><span className="text-blue-400">Funny quips in your pocket.</span></p>
-        <p><span className="text-blue-400">Serious pitches with confidence</span> &nbsp; A library of human warmth.</p>
+        <p><span className="text-blue-400">Serious pitches with confidence</span>   A library of human warmth.</p>
         <p className="mt-2 italic">Original human results™</p>
         <p className="text-xs mt-1">© Copyright 2024 · Built with the ChatGPT</p>
       </div>
