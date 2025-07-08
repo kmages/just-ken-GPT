@@ -1,0 +1,37 @@
+<!-- app.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Damn. Good. Writer. — App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Damn. Good. Writer.</h1>
+    <h2>Digital Cyrano</h2>
+  </header>
+
+  <main>
+    <div class="prompt-area">
+      <label for="userPrompt">Write your prompt here:</label>
+      <input type="text" id="userPrompt" placeholder="The human future of AI..." />
+      <button id="submitPrompt">New Prompt</button>
+    </div>
+
+    <div id="thinkingStatus">
+      <span id="thinkingText">Thinking...</span>
+    </div>
+
+    <div id="outputBox">
+      <p id="aiResponse">Your AI-generated response will appear here.</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Just Ken GPT. No em dashes. Ever.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

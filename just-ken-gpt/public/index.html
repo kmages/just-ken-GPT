@@ -1,0 +1,58 @@
+<!-- ~/frontend/just-ken-gpt/public/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Damn. Good. Writer.</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        text-align: center;
+        padding: 2rem;
+        background: #fff;
+        color: #111;
+      }
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+      .icon-banner {
+        width: 160px;
+        margin-bottom: 2rem;
+      }
+      textarea {
+        width: 100%;
+        max-width: 600px;
+        height: 120px;
+        font-size: 1rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
+      }
+      button {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        background: #111;
+        color: white;
+        border: none;
+        cursor: pointer;
+        margin-right: 0.5rem;
+      }
+      #output {
+        margin-top: 2rem;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <img class="icon-banner" src="https://firebasestorage.googleapis.com/v0/b/just-ken-gpt.firebasestorage.app/o/icons.png?alt=media&token=08e8d420-2d31-4b95-83cf-6b0e206339bb" alt="Icons" />
+    <h1>Damn. Good. Writer.</h1>
+    <p>“EGOT voice. Precision tone. No em dashes.”</p>
+    <textarea id="userInput" placeholder="Write your prompt here..."></textarea><br />
+    <button id="submitBtn">📝 Write Like Me</button>
+    <button onclick="location.reload()">🔄 Clear All</button>
+    <div id="output"></div>
+
+    <script src="main.js" defer></script>
+  </body>
+</html>
