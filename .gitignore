@@ -67,3 +67,4 @@ node_modules/
 
 # dataconnect generated files
 .dataconnect
+corpus/scored_corpus_faiss_12mb_20250711.jsonl
